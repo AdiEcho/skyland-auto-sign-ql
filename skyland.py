@@ -31,13 +31,13 @@ token_env = os.environ.get('SKLAND_TOKEN')
 http_local = threading.local()
 header = {
     'cred': '',
-    'User-Agent': 'Mozilla/5.0 (Linux; Android 12; SM-A5560 Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/101.0.4951.61 Safari/537.36; SKLand/1.52.1',
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 13; Pixel 4 XL Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/144.0.7559.59 Mobile Safari/537.36; SKLand/1.52.1',
     'Accept-Encoding': 'gzip',
     'Connection': 'close',
     'X-Requested-With': 'com.hypergryph.skland'
 }
 header_login = {
-    'User-Agent': 'Mozilla/5.0 (Linux; Android 12; SM-A5560 Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/101.0.4951.61 Safari/537.36; SKLand/1.52.1',
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 13; Pixel 4 XL Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/144.0.7559.59 Mobile Safari/537.36; SKLand/1.52.1',
     'Accept-Encoding': 'gzip',
     'Connection': 'close',
     'dId': get_d_id(),
@@ -47,10 +47,10 @@ header_login = {
 # 签名请求头一定要这个顺序，否则失败
 # timestamp是必填的,其它三个随便填,不要为none即可
 header_for_sign = {
-    'platform': '',
+    'platform': '3',
     'timestamp': '',
-    'dId': '',
-    'vName': ''
+    'dId': header_login['dId'],
+    'vName': '1.0.0'
 }
 
 # 签到url
@@ -294,7 +294,6 @@ def do_sign(cred_resp):
     http_local.header = header.copy()
     http_local.header['cred'] = cred_resp['cred']
     characters = get_binding_list()
-    success = True
     global msg
     for i in characters:
         app_code = i['appCode']
