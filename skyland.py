@@ -148,7 +148,11 @@ def get_sign_header(url: str, method, body, h):
     if method.lower() == 'get':
         h['sign'], header_ca = generate_signature(http_local.token, p.path, p.query)
     else:
-        h['sign'], header_ca = generate_signature(http_local.token, p.path, json.dumps(body))
+        h['sign'], header_ca = generate_signature(
+            http_local.token,
+            p.path,
+            json.dumps(body) if body is not None else ''
+        )
     for i in header_ca:
         h[i] = header_ca[i]
     return h
